@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.treetory.test.mvc.mapper.TestMapper">
+	
+	<!-- 조회 : 멀티 -->
+    <select id="selectTestMulti" parameterType="java.util.HashMap" resultType="java.util.HashMap"> 
+		select	id
+		,		col1
+		,		col2
+		,		col3
+		,		col4
+		from	test	
+	</select>
+	
+	<!-- 조회 : 단일 --> 
+	<select id="selectTestSingle" parameterType="java.util.HashMap" resultType="java.util.HashMap"> 
+		select	id
+		,		col1
+		,		col2
+		,		col3
+		,		col4
+		from	test
+		where	id = #{id}
+	</select>
+	
+	<!-- 입력 --> 
+	<insert id="insertTest" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="id"> 
+		insert
+		into	test
+		(		col1
+		,		col2
+		,		col3
+		,		col4
+		)
+		values
+		(		#{col1}
+		,		#{col2}
+		,		#{col3}
+		,		#{col4}
+		)	
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateTest" parameterType="java.util.HashMap">
+		update	test
+		set		col1 = #{col1}
+		<if test="col2 != null">
+			,		col2 = #{col2}
+		</if>
+		<if test="col3 != null">
+			,		col3 = #{col3}
+		</if>
+		<if test="col4 != null">
+			,		col4 = #{col4}
+		</if>
+		where	id = #{id}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteTest" parameterType="java.util.HashMap"> 
+		delete
+		from	test
+		where	id = #{id}
+	</delete>
+	
+</mapper>
